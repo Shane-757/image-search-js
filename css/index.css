@@ -1,0 +1,86 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+.example {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  background-color: #fff;
+  color: #2f2f37;
+  max-width: 960px;
+  padding: 16px;
+}
+
+.example code {
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #ff6b0a;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.example .background {
+  height: 240px;
+  background-image: url("../images/logo.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.header {
+  background-color: #0f22cf;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-form {
+  align-items: center;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form input {
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+}
+
+.search-button {
+  position: relative;
+  margin-left: -44px;
+  border-radius: 5px;
+  height: 30px;
+  border: 1px solid #ccc;
+}
+
+.info {
+  display: flex;
+  font-size: 12px;
+  padding-right: 15px;
+}
+
+.info-item {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo-card {
+  width: 400px;
+  height: 300px;
+  margin: 10px;
+  background-color: #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
