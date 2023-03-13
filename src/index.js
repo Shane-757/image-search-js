@@ -3,7 +3,6 @@ import Notiflix from "notiflix";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css"
 
-
 const API_KEY = '34086149-ce97166a0a74463c53bfd7508';
 const BASE_URL = 'https://pixabay.com/api/';
 const PER_PAGE = 40;
@@ -16,8 +15,6 @@ let imageLinks = [];
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-
-
 
 loadMoreBtn.style.display = 'none';
 searchForm.addEventListener('submit', onSubmitSearchForm);
@@ -33,8 +30,7 @@ function onSubmitSearchForm(event) {
   searchImages();
 }
 
-async function searchImages() {
-  
+async function searchImages() { 
   try {
     const response = await axios.get(BASE_URL, {
       params: {
@@ -47,7 +43,6 @@ async function searchImages() {
         per_page: PER_PAGE,
       },
     });
-
     const data = response.data;
     
     if (data.hits.length > 0) {
@@ -62,7 +57,6 @@ async function searchImages() {
 
       gallery.appendChild(fragment);
 
-
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
@@ -76,7 +70,6 @@ async function searchImages() {
       } else {
         loadMoreBtn.style.display = 'block'; 
       }
-      
       const newLightbox = new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
       //newLightbox.refresh();
 
@@ -94,7 +87,6 @@ async function searchImages() {
     Notiflix.Notify.failure('Something went wrong. Please try again later.');
     console.error(error);
   }
-  
 }
 
 function onLoadMore() {
@@ -120,12 +112,10 @@ function createPhotoCard(hit) {
    link.appendChild(img);
   photoCard.appendChild(link);
 
-
-
   const info = document.createElement('div');
   info.classList.add('info');
 
-const likes = document.createElement('p');
+  const likes = document.createElement('p');
   likes.classList.add('info-item');
   likes.innerHTML = `<b>Likes</b>${hit.likes}`;
   info.appendChild(likes);
@@ -145,7 +135,6 @@ const likes = document.createElement('p');
   downloads.innerHTML = `<b>Downloads</b>${hit.downloads}`;
   info.appendChild(downloads);
 
-  
   photoCard.appendChild(info);
 
   imageLinks.push(link);
