@@ -1,6 +1,12 @@
 @import './common';
 @import './example';
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .header{
     background-color: #0f22cf;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -53,4 +59,14 @@
     border-radius: 10px;
     overflow: hidden;
     position: relative;
+}
+.footer{
+    background-color: #0f22cf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: #fff;
+    margin-top: auto;
 }

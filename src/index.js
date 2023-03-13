@@ -24,6 +24,7 @@ searchForm.addEventListener('submit', onSubmitSearchForm);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSubmitSearchForm(event) {
+  imageLinks = [];
   event.preventDefault();
   currentPage = 1;
   currentQuery = event.target.searchQuery.value.trim();
@@ -33,6 +34,7 @@ function onSubmitSearchForm(event) {
 }
 
 async function searchImages() {
+  
   try {
     const response = await axios.get(BASE_URL, {
       params: {
@@ -47,7 +49,7 @@ async function searchImages() {
     });
 
     const data = response.data;
-
+    
     if (data.hits.length > 0) {
       totalHits = data.totalHits;
 
@@ -68,14 +70,21 @@ async function searchImages() {
         Notiflix.Notify.success(`We found ${totalHits} images in total.`);
       }
 
-      if (currentPage === 13) {
+      if (currentPage === 13 || data.hits.length < PER_PAGE) {
         loadMoreBtn.style.display = 'none';
          Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
       } else {
         loadMoreBtn.style.display = 'block'; 
       }
+      
       const newLightbox = new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
       //newLightbox.refresh();
+
+      const { height: cardHeight } = document
+      .querySelector(".gallery")
+      .firstElementChild.getBoundingClientRect();
+      window.scrollBy({ top: cardHeight * 4, behavior: 'smooth' }); 
+      
     } else {
       Notiflix.Notify.warning(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -85,6 +94,7 @@ async function searchImages() {
     Notiflix.Notify.failure('Something went wrong. Please try again later.');
     console.error(error);
   }
+  
 }
 
 function onLoadMore() {
