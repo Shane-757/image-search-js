@@ -58,8 +58,7 @@ async function searchImages() {
 
       gallery.appendChild(fragment);
 
-      const simpleLightbox = new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
-      //simpleLightbox.refresh();
+      new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
 
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
