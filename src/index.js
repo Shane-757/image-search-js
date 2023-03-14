@@ -16,6 +16,7 @@ const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 
+
 loadMoreBtn.style.display = 'none';
 searchForm.addEventListener('submit', onSubmitSearchForm);
 loadMoreBtn.addEventListener('click', onLoadMore);
@@ -57,6 +58,9 @@ async function searchImages() {
 
       gallery.appendChild(fragment);
 
+      const simpleLightbox = new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
+      //simpleLightbox.refresh();
+
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
@@ -70,8 +74,6 @@ async function searchImages() {
       } else {
         loadMoreBtn.style.display = 'block'; 
       }
-      const newLightbox = new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
-      //newLightbox.refresh();
 
       const { height: cardHeight } = document
       .querySelector(".gallery")
@@ -93,6 +95,7 @@ function onLoadMore() {
   currentPage += 1;
   searchImages();
 }
+
 
 function createPhotoCard(hit) {
   const photoCard = document.createElement('div');
