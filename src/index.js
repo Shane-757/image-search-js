@@ -18,8 +18,6 @@ let searchHistory = [];
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-
-
 const searchInput = searchForm.querySelector('input[name="searchQuery"]');
 const searchHistorySelect = searchForm.querySelector('#search-history');
 
@@ -71,7 +69,6 @@ async function searchImages() {
       newLightBox = new simpleLightbox('.gallery a');
       newLightBox.refresh();
     
-
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
@@ -85,12 +82,10 @@ async function searchImages() {
       } else {
         loadMoreBtn.style.display = 'block'; 
       }
-
       const { height: cardHeight } = document
       .querySelector(".gallery")
       .firstElementChild.getBoundingClientRect();
       window.scrollBy({ top: cardHeight * 4, behavior: 'smooth' }); 
-      
     } else {
       Notiflix.Notify.warning(
         'Sorry, there are no images matching your search query. Please try again.'
