@@ -1,6 +1,6 @@
 import axios from "axios";
 import Notiflix from "notiflix";
-import SimpleLightbox from "simplelightbox";
+import simpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css"
 
 const API_KEY = '34086149-ce97166a0a74463c53bfd7508';
@@ -10,7 +10,8 @@ const PER_PAGE = 40;
 let currentPage = 1;
 let currentQuery = '';
 let totalHits = 0;
-let imageLinks = [];
+let newLightBox;
+
 
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
@@ -22,7 +23,7 @@ searchForm.addEventListener('submit', onSubmitSearchForm);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSubmitSearchForm(event) {
-  imageLinks = [];
+  //imageLinks = [];
   event.preventDefault();
   currentPage = 1;
   currentQuery = event.target.searchQuery.value.trim();
@@ -58,7 +59,9 @@ async function searchImages() {
 
       gallery.appendChild(fragment);
 
-      new SimpleLightbox(imageLinks, { captionsData: 'data-lb-caption' });
+      newLightBox = new simpleLightbox('.gallery a');
+      newLightBox.refresh();
+    
 
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
@@ -92,6 +95,7 @@ async function searchImages() {
 
 function onLoadMore() {
   currentPage += 1;
+  newLightBox.destroy();
   searchImages();
 }
 
@@ -139,7 +143,7 @@ function createPhotoCard(hit) {
 
   photoCard.appendChild(info);
 
-  imageLinks.push(link);
+
 
   return photoCard;
 }
