@@ -9,12 +9,20 @@
   </head>
   <body>
     <header class="header">
-  <form class="search-form" id="search-form">
-    <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-    <button class="search-button" type="submit">
-      <svg class="search-icon" width="20" height="20">
-        <use href="./images/sprite.svg#icon-search"></use>
-    </button>
+      <form class="search-form" id="search-form">
+        <div class="search-container">
+          <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+          <button class="search-button" type="submit">
+            <svg class="search-icon" width="20" height="16">
+              <use href="./images/sprite.svg#icon-search"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="dropdown-container">
+          <select id="search-history">
+            <option value="">Previous search</option>
+          </select>
+        </div> 
   </form>
   </header>
   <div class="gallery">

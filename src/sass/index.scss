@@ -15,6 +15,7 @@ body {
         margin-bottom: 50px;
         display: flex;
         justify-content: center;
+        flex-direction: column;
 }
 .search-form input{
     width: 300px;

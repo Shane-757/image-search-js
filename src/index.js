@@ -7,10 +7,12 @@ const API_KEY = '34086149-ce97166a0a74463c53bfd7508';
 const BASE_URL = 'https://pixabay.com/api/';
 const PER_PAGE = 40;
 
+
 let currentPage = 1;
 let currentQuery = '';
 let totalHits = 0;
 let newLightBox;
+let searchHistory = [];
 
 
 const searchForm = document.querySelector('#search-form');
@@ -18,17 +20,24 @@ const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 
 
+const searchInput = searchForm.querySelector('input[name="searchQuery"]');
+const searchHistorySelect = searchForm.querySelector('#search-history');
+
+
 loadMoreBtn.style.display = 'none';
 searchForm.addEventListener('submit', onSubmitSearchForm);
 loadMoreBtn.addEventListener('click', onLoadMore);
+searchHistorySelect.addEventListener('change', onSearchHistorySelectChange);
+
 
 function onSubmitSearchForm(event) {
-  //imageLinks = [];
   event.preventDefault();
   currentPage = 1;
   currentQuery = event.target.searchQuery.value.trim();
     gallery.innerHTML = '';
-    loadMoreBtn.style.display = 'none'; 
+  loadMoreBtn.style.display = 'none'; 
+  searchHistory.unshift(currentQuery);
+  populateSearchHistory();
   searchImages();
 }
 
@@ -99,6 +108,25 @@ function onLoadMore() {
   searchImages();
 }
 
+function onSearchHistorySelectChange() {
+  const selectedSearch = searchHistorySelect.value;
+  if (selectedSearch) {
+    searchInput.value = selectedSearch;
+    searchForm.submit();
+  }
+}
+
+function populateSearchHistory() {
+  searchHistorySelect.innerHTML = '';
+  const selectFragment = document.createDocumentFragment();
+  searchHistory.forEach(search => {
+    const option = document.createElement('option');
+    option.value = search;
+    option.textContent = search;
+    selectFragment.appendChild(option);
+  });
+  searchHistorySelect.appendChild(selectFragment);
+}
 
 function createPhotoCard(hit) {
   const photoCard = document.createElement('div');
@@ -147,3 +175,4 @@ function createPhotoCard(hit) {
 
   return photoCard;
 }
+
