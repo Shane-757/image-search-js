@@ -20,6 +20,7 @@ const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const searchInput = searchForm.querySelector('input[name="searchQuery"]');
 const searchHistorySelect = searchForm.querySelector('#search-history');
+const perPageSelect = document.querySelector('#per-page');
 
 
 loadMoreBtn.style.display = 'none';
@@ -37,6 +38,7 @@ function onSubmitSearchForm(event) {
   searchHistory.unshift(currentQuery);
   populateSearchHistory();
   searchImages();
+   perPageSelect.value = '40';
 }
 
 async function searchImages() { 
@@ -49,7 +51,7 @@ async function searchImages() {
         orientation: 'horizontal',
         safesearch: true,
         page: currentPage,
-        per_page: PER_PAGE,
+        per_page: parseInt(perPageSelect.value), //PER_PAGE,
       },
     });
     const data = response.data;
