@@ -7,13 +7,11 @@ const API_KEY = '34086149-ce97166a0a74463c53bfd7508';
 const BASE_URL = 'https://pixabay.com/api/';
 const PER_PAGE = 40;
 
-
 let currentPage = 1;
 let currentQuery = '';
 let totalHits = 0;
 let newLightBox;
 let searchHistory = [];
-
 
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
@@ -22,25 +20,22 @@ const searchInput = searchForm.querySelector('input[name="searchQuery"]');
 const searchHistorySelect = searchForm.querySelector('#search-history');
 const perPageSelect = document.querySelector('#per-page');
 
-
 loadMoreBtn.style.display = 'none';
 searchForm.addEventListener('submit', onSubmitSearchForm);
 loadMoreBtn.addEventListener('click', onLoadMore);
 searchHistorySelect.addEventListener('change', onSearchHistorySelectChange);
 
-
 function onSubmitSearchForm(event) {
   event.preventDefault();
   currentPage = 1;
   currentQuery = event.target.searchQuery.value.trim();
-    gallery.innerHTML = '';
+  gallery.innerHTML = '';
   loadMoreBtn.style.display = 'none'; 
   searchHistory.unshift(currentQuery);
   populateSearchHistory();
   searchImages();
-   perPageSelect.value = '40';
+  //perPageSelect.value = '40';
 }
-
 async function searchImages() { 
   try {
     const response = await axios.get(BASE_URL, {
@@ -58,26 +53,20 @@ async function searchImages() {
     
     if (data.hits.length > 0) {
       totalHits = data.totalHits;
-
       const fragment = document.createDocumentFragment();
-
       data.hits.forEach((hit) => {
         const photoCard = createPhotoCard(hit);
         fragment.appendChild(photoCard);
       });
-
       gallery.appendChild(fragment);
-
       newLightBox = new simpleLightbox('.gallery a');
       newLightBox.refresh();
-    
       if (currentPage === 1) {
         loadMoreBtn.style.display = 'block';
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
       } else {
         Notiflix.Notify.success(`We found ${totalHits} images in total.`);
       }
-
       if (currentPage === 13 || data.hits.length < PER_PAGE) {
         loadMoreBtn.style.display = 'none';
          Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
@@ -128,19 +117,16 @@ function populateSearchHistory() {
 function createPhotoCard(hit) {
   const photoCard = document.createElement('div');
   photoCard.classList.add('photo-card');
-
   const link = document.createElement('a');
   link.href = hit.largeImageURL;
   link.setAttribute('data-lb-caption', hit.tags);
-
   const img = document.createElement('img');
   img.src = hit.webformatURL;
   img.alt = hit.tags;
   img.loading = 'lazy';
   img.width = 400;
   img.height = 240;
-
-   link.appendChild(img);
+  link.appendChild(img);
   photoCard.appendChild(link);
 
   const info = document.createElement('div');
@@ -165,11 +151,8 @@ function createPhotoCard(hit) {
   downloads.classList.add('info-item');
   downloads.innerHTML = `<b>Downloads</b>${hit.downloads}`;
   info.appendChild(downloads);
-
   photoCard.appendChild(info);
-
-
-
+  
   return photoCard;
 }
 
