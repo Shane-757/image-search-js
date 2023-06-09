@@ -1,8 +1,8 @@
 {
-  "name": "parcel-project-template",
+  "name": "image-search-js",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://Shane-757.github.io/goit-js-hw-11/",
+  "homepage": "https://shane-757.github.io/image-search-js/",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
